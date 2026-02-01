@@ -1,0 +1,118 @@
+
+<!DOCTYPE html>
+<html lang="uz" class="scroll-smooth">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <title>Poktil — Toza til, madaniyatli muloqot</title>
+    <base target="_blank" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Plus+Jakarta+Sans:wght@400;600;800&display=swap" rel="stylesheet">
+    <style>
+      :root {
+        --header-h: 88px;
+      }
+      @media (max-width: 768px) {
+        :root {
+          --header-h: 68px;
+        }
+      }
+      body {
+        font-family: 'Plus Jakarta Sans', sans-serif;
+        overflow: hidden;
+        margin: 0;
+        padding: 0;
+      }
+      h1, h2, h3, .font-space {
+        font-family: 'Space Grotesk', sans-serif;
+      }
+      .snap-container {
+        scroll-snap-type: y mandatory;
+        height: 100dvh;
+        overflow-y: auto;
+        scroll-behavior: smooth;
+        -webkit-overflow-scrolling: touch;
+        scroll-padding-top: 0; /* Handled by section padding */
+      }
+      .snap-section {
+        scroll-snap-align: start;
+        scroll-snap-stop: always;
+        height: 100dvh;
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        /* Padding top accounts for fixed header */
+        padding-top: var(--header-h);
+        position: relative;
+        overflow: hidden;
+        box-sizing: border-box;
+      }
+      /* Hide scrollbar */
+      .snap-container::-webkit-scrollbar {
+        display: none;
+      }
+      .snap-container {
+        -ms-overflow-style: none;
+        scrollbar-width: none;
+      }
+      .neon-text {
+        text-shadow: 0 0 15px rgba(56, 189, 248, 0.5), 0 0 30px rgba(56, 189, 248, 0.2);
+      }
+      .glass {
+        background: rgba(255, 255, 255, 0.05);
+        backdrop-filter: blur(12px);
+        -webkit-backdrop-filter: blur(12px);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+      }
+      .dark .glass {
+        background: rgba(15, 23, 42, 0.4);
+        border: 1px solid rgba(56, 189, 248, 0.1);
+      }
+      .reveal {
+        opacity: 0;
+        transform: translateY(20px);
+        transition: all 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+      }
+      .reveal.active {
+        opacity: 1;
+        transform: translateY(0);
+      }
+
+      /* On smaller screens, allow internal scrolling if content overflows 100vh - header */
+      .snap-content {
+        flex: 1;
+        overflow-y: auto;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        width: 100%;
+      }
+      /* Hide internal scrollbar */
+      .snap-content::-webkit-scrollbar { display: none; }
+      .snap-content { -ms-overflow-style: none; scrollbar-width: none; }
+
+      @media (max-width: 768px) {
+        .snap-content {
+          justify-content: flex-start;
+          padding-bottom: 2rem;
+        }
+      }
+    </style>
+  <script type="importmap">
+{
+  "imports": {
+    "react-dom/": "https://esm.sh/react-dom@^19.2.4/",
+    "react/": "https://esm.sh/react@^19.2.4/",
+    "react": "https://esm.sh/react@^19.2.4"
+  }
+}
+</script>
+<link rel="stylesheet" href="/index.css">
+</head>
+  <body class="bg-slate-50 dark:bg-slate-950 text-slate-900 dark:text-slate-100 transition-colors duration-500">
+    <div id="root"></div>
+  <script type="module" src="/index.tsx"></script>
+</body>
+</html>
