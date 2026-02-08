@@ -57,3 +57,49 @@ export const STEPS = [
     description: "Endi bot har bir haqoratli xabarni avtomatik ravishda o'chiradi."
   }
 ];
+
+export const PRICING_PLANS = [
+  {
+    slug: "freemium",
+    name: "Freemium",
+    price: "1 oy bepul",
+    description: "Boshlang, sinab ko'ring va guruhingizni madaniyatli saqlang! 🌱",
+    color: "emerald",
+    features: [
+      "Haqoratli so'zlarni aniqlash va o'chirish",
+      "Ogohlantirish yoki tinch qolish opsiyasi",
+      "50 ta so'zgacha bo'lgan xabarlarni tekshirish"
+    ],
+    buttonText: "Sinab ko'rish",
+    highlight: false
+  },
+  {
+    slug: "premium",
+    name: "Premium",
+    price: "34,500 so'm/oy",
+    description: "Har bir xabarni nazorat qiling va guruhingiz haqiqiy madaniyat markaziga aylanadi! ✨",
+    color: "sky",
+    features: [
+      "Barcha Freemium funksiyalari",
+      "100 ta so'zgacha bo'lgan xabarlarni tekshirish",
+      "Media captionlarini ham tekshiradi (audio, foto, hujjatlar)"
+    ],
+    buttonText: "Premiumga o'tish",
+    highlight: false
+  },
+  {
+    slug: "ultra",
+    name: "Ultra",
+    price: "47,900 so'm/oy",
+    description: "Sizning guruhingiz uchun maksimal himoya va mukammallik! 🛡️",
+    color: "purple",
+    features: [
+      "Barcha Premium funksiyalari",
+      "Cheksiz so'zlar tekshiruvi",
+      "Tahrirlangan xabarlar va captionlarni aniqlash",
+      "Guruh monitoringi va statistika (tez orada)"
+    ],
+    buttonText: "Eng yaxshi tanlov",
+    highlight: true
+  }
+];
