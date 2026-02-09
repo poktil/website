@@ -307,7 +307,7 @@ const PricingSection: React.FC = () => {
 
                 <div className="relative z-10">
                   <a 
-                    href={`https://t.me/poktil_bot?start=buy`}
+                    href={`https://t.me/poktil_bot?start=subscription`}
                     target="_blank"
                     rel="noopener noreferrer"
                     className={`inline-flex items-center justify-center w-full md:w-auto px-10 md:px-20 py-5 md:py-6 rounded-2xl md:rounded-full text-white font-black text-sm md:text-xl transition-all shadow-2xl uppercase tracking-[0.2em] transform active:scale-95 ${getButtonColor(activePlan.color)}`}

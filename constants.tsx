@@ -60,46 +60,45 @@ export const STEPS = [
 
 export const PRICING_PLANS = [
   {
-    slug: "freemium",
-    name: "Freemium",
-    price: "1 oy bepul",
-    description: "Boshlang, sinab ko'ring va guruhingizni madaniyatli saqlang! 🌱",
+    slug: "base",
+    name: "Base",
+    price: "Bepul",
+    description: "Boshlang'ich darajadagi himoya. Kichik guruhlar va shaxsiy muloqotlar uchun ideal. 🌱",
     color: "emerald",
     features: [
       "Haqoratli so'zlarni aniqlash va o'chirish",
-      "Ogohlantirish yoki tinch qolish opsiyasi",
       "50 ta so'zgacha bo'lgan xabarlarni tekshirish"
     ],
-    buttonText: "Sinab ko'rish",
+    buttonText: "Boshlash",
     highlight: false
   },
   {
     slug: "premium",
     name: "Premium",
-    price: "34,500 so'm/oy",
-    description: "Har bir xabarni nazorat qiling va guruhingiz haqiqiy madaniyat markaziga aylanadi! ✨",
+    price: "345,900 so'm/oy",
+    description: "Kengaytirilgan imkoniyatlar bilan guruhingizni yanada xavfsizroq qiling! ✨",
     color: "sky",
     features: [
-      "Barcha Freemium funksiyalari",
-      "100 ta so'zgacha bo'lgan xabarlarni tekshirish",
+      "Barcha Base reja xususiyatlari",
+      "70 ta so'zgacha bo'lgan xabarlarni tekshirish",
       "Media captionlarini ham tekshiradi (audio, foto, hujjatlar)"
     ],
     buttonText: "Premiumga o'tish",
     highlight: false
   },
   {
-    slug: "ultra",
-    name: "Ultra",
-    price: "47,900 so'm/oy",
-    description: "Sizning guruhingiz uchun maksimal himoya va mukammallik! 🛡️",
+    slug: "ultimate",
+    name: "Ultimate",
+    price: "411,900 so'm/oy",
+    description: "Maksimal nazorat va cheksiz imkoniyatlar. Katta jamoalar uchun mukammal tanlov! 🛡️",
     color: "purple",
     features: [
-      "Barcha Premium funksiyalari",
-      "Cheksiz so'zlar tekshiruvi",
+      "Barcha Premium reja xususiyatlari",
+      "Cheksiz so'zlar soni bilan xabarlarni tekshirish",
       "Tahrirlangan xabarlar va captionlarni aniqlash",
       "Guruh monitoringi va statistika (tez orada)"
     ],
-    buttonText: "Eng yaxshi tanlov",
+    buttonText: "Ultimate tanlov",
     highlight: true
   }
 ];
