@@ -9,14 +9,16 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Plus+Jakarta+Sans:wght@400;600;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Plus+Jakarta+Sans:wght@300;400;600;800&display=swap" rel="stylesheet">
     <style>
       :root {
-        --header-h: 88px;
+        --header-h: 100px;
+        --neon-sky: #0ea5e9;
+        --neon-purple: #a855f7;
       }
       @media (max-width: 768px) {
         :root {
-          --header-h: 68px;
+          --header-h: 80px;
         }
       }
       body {
@@ -24,7 +26,8 @@
         overflow: hidden;
         margin: 0;
         padding: 0;
-        background-color: #020617; /* Matches slate-950 */
+        background-color: #020617;
+        color: #f8fafc;
       }
       h1, h2, h3, .font-space {
         font-family: 'Space Grotesk', sans-serif;
@@ -46,9 +49,7 @@
         padding-top: var(--header-h);
         position: relative;
         overflow: hidden;
-        box-sizing: border-box;
       }
-      /* Hide scrollbar */
       .snap-container::-webkit-scrollbar {
         display: none;
       }
@@ -57,42 +58,50 @@
         scrollbar-width: none;
       }
       .neon-text {
-        text-shadow: 0 0 15px rgba(56, 189, 248, 0.5), 0 0 30px rgba(56, 189, 248, 0.2);
+        text-shadow: 0 0 10px rgba(14, 165, 233, 0.5), 0 0 20px rgba(14, 165, 233, 0.3);
       }
       .glass {
-        background: rgba(255, 255, 255, 0.05);
-        backdrop-filter: blur(12px);
-        -webkit-backdrop-filter: blur(12px);
-        border: 1px solid rgba(255, 255, 255, 0.1);
-      }
-      .dark .glass {
         background: rgba(15, 23, 42, 0.4);
-        border: 1px solid rgba(56, 189, 248, 0.1);
+        backdrop-filter: blur(40px) saturate(200%);
+        -webkit-backdrop-filter: blur(40px) saturate(200%);
+        border: 1px solid rgba(255, 255, 255, 0.05);
       }
       .reveal {
         opacity: 0;
-        transform: translateY(20px);
-        transition: all 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+        transform: translateY(40px);
+        transition: all 1s cubic-bezier(0.16, 1, 0.3, 1);
       }
       .reveal.active {
         opacity: 1;
         transform: translateY(0);
       }
-
+      .grain {
+        position: fixed;
+        top: 0; left: 0; width: 100%; height: 100%;
+        background-image: url("https://grainy-gradients.vercel.app/noise.svg");
+        opacity: 0.02;
+        pointer-events: none;
+        z-index: 100;
+      }
       .snap-content {
         flex: 1;
         display: flex;
         flex-direction: column;
         justify-content: center;
         width: 100%;
-        padding: 1rem 0;
-        overflow: hidden; /* Strict fit */
+        max-height: calc(100dvh - var(--header-h));
       }
-
+      button:focus-visible {
+        outline: 2px solid var(--neon-sky);
+        outline-offset: 4px;
+      }
+      /* Extreme rounding utility */
+      .rounded-extreme {
+        border-radius: 4rem;
+      }
       @media (max-width: 768px) {
-        .snap-content {
-          justify-content: center;
-          padding-top: 0;
+        .rounded-extreme {
+          border-radius: 2.5rem;
         }
       }
     </style>
@@ -107,7 +116,8 @@
 </script>
 <link rel="stylesheet" href="/index.css">
 </head>
-  <body class="bg-slate-50 dark:bg-slate-950 text-slate-900 dark:text-slate-100 transition-colors duration-500">
+  <body class="bg-slate-950 text-slate-100">
+    <div class="grain"></div>
     <div id="root"></div>
   <script type="module" src="/index.tsx"></script>
 </body>
