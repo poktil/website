@@ -1,9 +1,9 @@
 
 import React, { useEffect, Suspense, lazy } from 'react';
+import { motion, AnimatePresence } from 'motion/react';
 import { Header } from './Header';
 import { Hero } from './Hero';
 
-// Lazy load sections below the fold for better initial performance
 const WhySection = lazy(() => import('./WhySection'));
 const PricingSection = lazy(() => import('./PricingSection'));
 const FeaturesSection = lazy(() => import('./FeaturesSection'));
@@ -11,19 +11,17 @@ const HowItWorksSection = lazy(() => import('./HowItWorksSection'));
 const FooterSection = lazy(() => import('./FooterSection'));
 
 const SectionFallback = () => (
-  <div className="snap-section bg-slate-50 dark:bg-slate-950 flex items-center justify-center">
-    <div className="w-12 h-12 border-4 border-sky-500 border-t-transparent rounded-full animate-spin"></div>
+  <div className="h-screen w-full flex items-center justify-center bg-neutral-950">
+    <motion.div 
+      animate={{ rotate: 360, scale: [1, 1.2, 1] }}
+      transition={{ duration: 2, repeat: Infinity, ease: "linear" }}
+      className="w-12 h-12 border-2 border-[#d4af37]/20 border-t-[#d4af37] rounded-full"
+    />
   </div>
 );
 
 const App: React.FC = () => {
   useEffect(() => {
-    // Force dark mode or respect preference
-    if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
-      document.documentElement.classList.add('dark');
-    }
-
-    // Handle initial hash in URL on reload
     const handleInitialHash = () => {
       const hash = window.location.hash;
       if (hash) {
@@ -43,57 +41,32 @@ const App: React.FC = () => {
   }, []);
 
   return (
-    <div className="selection:bg-sky-500/30">
+    <div className="bg-neutral-950 text-neutral-100 selection:bg-[#62b4e0]/30 selection:text-white">
       <Header />
-      <main className="snap-container">
+      
+      <main className="main-container overflow-x-hidden">
         <Hero />
         <Suspense fallback={<SectionFallback />}>
           <WhySection />
-        </Suspense>
-        <Suspense fallback={<SectionFallback />}>
           <PricingSection />
-        </Suspense>
-        <Suspense fallback={<SectionFallback />}>
           <FeaturesSection />
-        </Suspense>
-        <Suspense fallback={<SectionFallback />}>
           <HowItWorksSection />
-        </Suspense>
-        <Suspense fallback={<SectionFallback />}>
           <FooterSection />
         </Suspense>
       </main>
 
       <style>{`
-        @keyframes float {
-          0%, 100% { transform: translateY(0) rotate(0) scale(1); }
-          50% { transform: translateY(-20px) rotate(2deg) scale(1.02); }
-        }
-        @keyframes slideUpFade {
-          from { 
-            opacity: 0; 
-            transform: translateY(20px) scale(0.98); 
-            filter: blur(4px);
-          }
-          to { 
-            opacity: 1; 
-            transform: translateY(0) scale(1); 
-            filter: blur(0);
-          }
-        }
-        .animate-float {
-          animation: float 5s ease-in-out infinite;
-        }
-        .animate-in-smooth {
-          animation: slideUpFade 0.6s cubic-bezier(0.22, 1, 0.36, 1) forwards;
-        }
-        .snap-container {
+        .main-container {
           scroll-behavior: smooth;
         }
-        @media (max-width: 640px) {
-           .snap-section {
-             padding-top: 68px;
-           }
+        /* Hide scrollbar for Chrome, Safari and Opera */
+        .scrollbar-hide::-webkit-scrollbar {
+          display: none;
+        }
+        /* Hide scrollbar for IE, Edge and Firefox */
+        .scrollbar-hide {
+          -ms-overflow-style: none;  /* IE and Edge */
+          scrollbar-width: none;  /* Firefox */
         }
       `}</style>
     </div>

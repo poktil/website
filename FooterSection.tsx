@@ -1,60 +1,97 @@
 
 import React from 'react';
-import { useReveal } from './hooks';
+import { motion } from 'motion/react';
+import { Shield, Send, Instagram, Github, Linkedin, Crown, Globe } from 'lucide-react';
+import { SOCIAL_LINKS } from './constants';
 
 const FooterSection: React.FC = () => {
-  const ref = useReveal();
+  const getIcon = (name: string) => {
+    if (name.includes('LinkedIn')) return <Linkedin className="w-4 h-4" />;
+    if (name.includes('Instagram')) return <Instagram className="w-4 h-4" />;
+    if (name.includes('Telegram')) return <Send className="w-4 h-4" />;
+    return <Globe className="w-4 h-4" />;
+  };
+
   return (
-    <section id="footer" className="snap-section bg-slate-950 text-white px-4 md:px-8 overflow-hidden relative" ref={ref}>
-      <div className="absolute top-1/4 left-1/4 w-[500px] h-[500px] bg-sky-500/5 rounded-full blur-[150px] animate-pulse"></div>
+    <section id="footer" className="snap-section bg-neutral-950 text-white px-4 md:px-8 relative py-24">
+      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full h-px bg-gradient-to-r from-transparent via-white/10 to-transparent"></div>
       
-      <div className="snap-content">
-        <div className="max-w-6xl mx-auto w-full grid md:grid-cols-2 gap-20 items-center">
-          <div className="reveal">
-            <div className="flex items-center space-x-5 mb-12">
-               <div className="w-20 h-20 bg-sky-500 rounded-[2rem] flex items-center justify-center text-white text-5xl font-black font-space shadow-[0_20px_40px_rgba(14,165,233,0.3)]">P</div>
-               <h2 className="text-5xl md:text-7xl font-black font-space tracking-tighter uppercase">Poktil</h2>
+      <div className="snap-content relative z-10">
+        <div className="max-w-7xl mx-auto w-full grid md:grid-cols-2 gap-24 items-start">
+          <motion.div 
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+          >
+            <div className="flex items-center space-x-6 mb-12">
+               <h2 className="text-5xl font-light font-serif tracking-[0.2em] uppercase">Poktil</h2>
             </div>
-            <h3 className="text-3xl md:text-5xl font-bold mb-8 text-slate-300 leading-tight tracking-tight">
-              Guruh muloqotini bugun <br />
-              <span className="text-sky-500 italic">yangi bosqichga</span> olib chiqing.
+            <h3 className="text-4xl md:text-5xl font-light mb-10 text-neutral-300 leading-tight font-serif italic">
+              Guruh muloqotini <br />
+              <span className="text-[#62b4e0]">yangi bosqichga</span> olib chiqing.
             </h3>
-            <p className="text-slate-400 text-base md:text-xl mb-12 max-w-md leading-relaxed">
+            <p className="text-neutral-500 text-lg mb-12 max-w-md font-light leading-relaxed">
               Poktil — faqat bot emas, u sizning virtual madaniyat posboningiz. 24/7 xizmatda.
             </p>
-            <div className="flex flex-wrap gap-6">
-              <a href="https://t.me/poktil_bot" className="px-12 py-5 bg-sky-500 rounded-full font-black uppercase tracking-widest text-sm hover:bg-sky-600 transition-all transform hover:scale-105 active:scale-95 shadow-2xl shadow-sky-500/20">Botga o'tish</a>
-              <a href="https://akbarswe.uz" className="px-10 py-5 glass rounded-full font-black uppercase tracking-widest text-sm hover:bg-white/10 transition-all border border-white/10">Bog'lanish</a>
+            <div className="flex flex-wrap gap-8">
+              <motion.a 
+                whileHover={{ scale: 1.02, backgroundColor: '#62b4e0', color: '#000' }}
+                whileTap={{ scale: 0.98 }}
+                href="https://t.me/poktil_bot" 
+                className="px-12 py-5 bg-white/5 border border-white/10 rounded-[2rem] font-bold uppercase tracking-widest text-[10px] transition-all"
+              >
+                Botga o'tish
+              </motion.a>
+              <motion.a 
+                whileHover={{ scale: 1.02, backgroundColor: 'rgba(255,255,255,0.05)' }}
+                whileTap={{ scale: 0.98 }}
+                href="https://akbarswe.uz" 
+                className="px-12 py-5 bg-transparent border border-white/10 rounded-[2rem] font-bold uppercase tracking-widest text-[10px] transition-all"
+              >
+                Bog'lanish
+              </motion.a>
             </div>
-          </div>
+          </motion.div>
 
-          <div className="reveal grid grid-cols-2 gap-12">
+          <motion.div 
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="grid grid-cols-2 gap-16"
+          >
             <div>
-              <h4 className="text-sky-500 font-black text-xs uppercase tracking-[0.4em] mb-8">Navigatsiya</h4>
-              <ul className="space-y-6 text-slate-500 font-bold text-sm md:text-base">
-                <li><button onClick={() => document.getElementById('hero')?.scrollIntoView({behavior: 'smooth'})} className="hover:text-white transition-colors">Bosh sahifa</button></li>
-                <li><button onClick={() => document.getElementById('narxlar')?.scrollIntoView({behavior: 'smooth'})} className="hover:text-white transition-colors">Narxlar</button></li>
-                <li><button onClick={() => document.getElementById('xususiyatlar')?.scrollIntoView({behavior: 'smooth'})} className="hover:text-white transition-colors">Imkoniyatlar</button></li>
-                <li><button onClick={() => document.getElementById('qollanma')?.scrollIntoView({behavior: 'smooth'})} className="hover:text-white transition-colors">Qo'llanma</button></li>
+              <h4 className="text-[#62b4e0] font-bold text-[10px] uppercase tracking-[0.5em] mb-10">Navigatsiya</h4>
+              <ul className="space-y-6 text-neutral-500 font-light text-sm tracking-widest">
+                <li><button onClick={() => document.getElementById('hero')?.scrollIntoView({behavior: 'smooth'})} className="hover:text-white transition-colors uppercase">Bosh sahifa</button></li>
+                <li><button onClick={() => document.getElementById('narxlar')?.scrollIntoView({behavior: 'smooth'})} className="hover:text-white transition-colors uppercase">Narxlar</button></li>
+                <li><button onClick={() => document.getElementById('xususiyatlar')?.scrollIntoView({behavior: 'smooth'})} className="hover:text-white transition-colors uppercase">Imkoniyatlar</button></li>
+                <li><button onClick={() => document.getElementById('qollanma')?.scrollIntoView({behavior: 'smooth'})} className="hover:text-white transition-colors uppercase">Qo'llanma</button></li>
               </ul>
             </div>
             <div>
-              <h4 className="text-purple-500 font-black text-xs uppercase tracking-[0.4em] mb-8">Ijtimoiy</h4>
-              <ul className="space-y-6 text-slate-500 font-bold text-sm md:text-base">
-                <li><a href="https://t.me/akbar_swe" className="hover:text-white transition-colors">Telegram</a></li>
-                <li><a href="https://instagram.com/akbar_swe" className="hover:text-white transition-colors">Instagram</a></li>
-                <li><a href="https://github.com/akbar-swe" className="hover:text-white transition-colors">GitHub</a></li>
-                <li><a href="https://linkedin.com/in/akbar-swe" className="hover:text-white transition-colors">LinkedIn</a></li>
+              <h4 className="text-neutral-300 font-bold text-[10px] uppercase tracking-[0.5em] mb-10">Ijtimoiy</h4>
+              <ul className="space-y-6 text-neutral-500 font-light text-sm tracking-widest">
+                {SOCIAL_LINKS.map((social, idx) => (
+                  <li key={idx}>
+                    <a href={social.link} className="hover:text-white transition-colors flex items-center gap-3 uppercase">
+                      {getIcon(social.name)}
+                      {social.name.split(' ')[0]}
+                    </a>
+                  </li>
+                ))}
               </ul>
             </div>
-          </div>
+          </motion.div>
         </div>
-      </div>
 
-      <div className="absolute bottom-10 left-0 w-full px-8">
-        <div className="max-w-6xl mx-auto flex flex-col md:flex-row justify-between items-center py-10 border-t border-white/5 gap-6">
-           <p className="text-[10px] font-black uppercase tracking-[0.5em] text-slate-600">© 2026 POKTIL PROJECT • BARCHA HUQUQLAR HIMOAYALANGAN</p>
-           <p className="text-[10px] font-black uppercase tracking-[0.5em] text-slate-600">MADE WITH ❤️ BY AKBAR</p>
+        <div className="mt-32 pt-12 border-t border-white/5 flex flex-col md:flex-row justify-between items-center gap-8">
+           <p className="text-[9px] font-bold uppercase tracking-[0.6em] text-neutral-700">© 2026 POKTIL PROJECT • BARCHA HUQUQLAR HIMOAYALANGAN</p>
+           <div className="flex items-center gap-4">
+             <Crown className="w-4 h-4 text-[#62b4e0] opacity-20" />
+             <p className="text-[9px] font-bold uppercase tracking-[0.6em] text-neutral-700">
+               MADE BY <a href="https://akbarswe.uz" className="hover:text-[#62b4e0] transition-colors">AKBAR</a>
+             </p>
+           </div>
         </div>
       </div>
     </section>
