@@ -1,36 +1,49 @@
 
 import React from 'react';
+import { motion } from 'motion/react';
 import { FEATURES } from './constants';
-import { useReveal } from './hooks';
 
 const FeaturesSection: React.FC = () => {
-  const ref = useReveal();
   return (
-    <section id="xususiyatlar" className="snap-section bg-slate-950 px-4 md:px-8" ref={ref}>
-      <div className="snap-content">
-        <div className="max-w-6xl mx-auto w-full">
-          <div className="text-center mb-20 reveal">
-            <h2 className="text-5xl md:text-8xl font-black mb-8 font-space text-white uppercase tracking-tighter">Imkoniyatlar</h2>
-            <p className="text-sm md:text-2xl text-slate-500 max-w-2xl mx-auto font-medium">
-              Tezkor, aniq va ishonchli. Poktil har bir harfni nazorat qiladi.
+    <section id="xususiyatlar" className="snap-section bg-neutral-950 px-4 md:px-8 relative overflow-hidden py-24">
+      <div className="snap-content relative z-10">
+        <div className="max-w-7xl mx-auto w-full">
+          <motion.div 
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="text-center mb-24"
+          >
+            <h2 className="text-4xl md:text-8xl font-light mb-8 font-serif text-white uppercase tracking-tight">Imkoniyatlar</h2>
+            <p className="text-xl md:text-2xl text-neutral-500 max-w-2xl mx-auto font-light leading-relaxed">
+              Tezkor, aniq va ishonchli. Poktil har bir harfni nazorat qiladi va guruhingizni pok saqlaydi.
             </p>
-          </div>
+          </motion.div>
           
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-12">
             {FEATURES.map((feature, idx) => (
-              <div key={idx} className="reveal" style={{ transitionDelay: `${idx * 0.1}s` }}>
-                <div className="p-10 rounded-extreme glass border-white/5 hover:border-sky-500/20 transition-all hover:-translate-y-3 group h-full shadow-[0_30px_60px_-15px_rgba(0,0,0,0.4)]">
-                  <div className="w-16 h-16 rounded-[1.8rem] bg-sky-500/10 text-sky-500 flex items-center justify-center mb-10 group-hover:bg-sky-500 group-hover:text-white transition-all duration-500 shadow-xl">
-                    {feature.icon}
-                  </div>
-                  <h3 className="text-2xl font-bold mb-5 font-space text-white group-hover:text-sky-400 transition-colors">
-                    {feature.title}
-                  </h3>
-                  <p className="text-sm md:text-base text-slate-400 leading-relaxed font-medium">
-                    {feature.description}
-                  </p>
-                </div>
-              </div>
+              <motion.div 
+                key={idx}
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: idx * 0.1 }}
+                whileHover={{ y: -10 }}
+                className="p-12 rounded-[3rem] bg-white/[0.02] border border-white/5 hover:border-[#62b4e0]/30 transition-all duration-500 group h-full shadow-2xl"
+              >
+                <motion.div 
+                  whileHover={{ scale: 1.1, rotate: 5 }}
+                  className="w-16 h-16 rounded-[2rem] bg-[#62b4e0]/5 text-[#62b4e0] flex items-center justify-center mb-10 group-hover:bg-[#62b4e0] group-hover:text-black transition-all duration-500 shadow-xl"
+                >
+                  {feature.icon}
+                </motion.div>
+                <h3 className="text-2xl font-bold mb-5 font-serif text-white group-hover:text-[#62b4e0] transition-colors tracking-wide">
+                  {feature.title}
+                </h3>
+                <p className="text-neutral-500 leading-relaxed font-light">
+                  {feature.description}
+                </p>
+              </motion.div>
             ))}
           </div>
         </div>

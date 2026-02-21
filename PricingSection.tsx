@@ -1,10 +1,10 @@
 
 import React, { useState } from 'react';
+import { motion, AnimatePresence } from 'motion/react';
 import { PRICING_PLANS } from './constants';
-import { useReveal } from './hooks';
+import { Check, Crown, Sparkles, Shield } from 'lucide-react';
 
 const PricingSection: React.FC = () => {
-  const ref = useReveal();
   const [selectedIdx, setSelectedIdx] = useState(1); 
   const activePlan = PRICING_PLANS[selectedIdx];
   
@@ -12,98 +12,125 @@ const PricingSection: React.FC = () => {
     switch(color) {
       case 'emerald': return 'rgba(16, 185, 129, 0.5)';
       case 'purple': return 'rgba(168, 85, 247, 0.5)';
-      default: return 'rgba(14, 165, 233, 0.5)';
+      default: return 'rgba(98, 180, 224, 0.5)';
     }
   };
 
   const getButtonColor = (color: string) => {
     switch(color) {
-      case 'emerald': return 'bg-emerald-500 hover:shadow-emerald-500/40';
-      case 'purple': return 'bg-purple-600 hover:shadow-purple-500/40';
-      default: return 'bg-sky-500 hover:shadow-sky-500/40';
+      case 'emerald': return 'bg-emerald-600/20 text-emerald-400 border-emerald-500/30';
+      case 'purple': return 'bg-purple-600/20 text-purple-400 border-purple-500/30';
+      default: return 'bg-[#62b4e0]/20 text-[#62b4e0] border-[#62b4e0]/30';
     }
   };
 
   return (
-    <section id="narxlar" className="snap-section bg-slate-950 px-4 md:px-8 relative overflow-hidden" ref={ref}>
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[80%] aspect-square bg-sky-500/5 rounded-full blur-[200px] pointer-events-none transition-all duration-1000"
-           style={{ backgroundColor: getGlowColor(activePlan.color).replace('0.5', '0.05') }}></div>
+    <section id="narxlar" className="snap-section bg-neutral-950 px-4 md:px-8 relative overflow-hidden py-24">
+      <motion.div 
+        animate={{ 
+          backgroundColor: getGlowColor(activePlan.color).replace('0.5', '0.03')
+        }}
+        className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full aspect-square rounded-full blur-[200px] pointer-events-none transition-colors duration-1000"
+      />
       
-      <div className="snap-content">
-        <div className="max-w-6xl mx-auto w-full relative z-10 flex flex-col lg:flex-row items-center gap-12 lg:gap-24">
+      <div className="snap-content relative z-10">
+        <div className="max-w-7xl mx-auto w-full flex flex-col lg:flex-row items-center gap-12 lg:gap-24">
           
-          <div className="reveal flex flex-row lg:flex-col items-center lg:items-start gap-6 lg:gap-12 shrink-0">
+          {/* Plan Selection - Improved for Mobile */}
+          <div className="flex flex-row lg:flex-col items-center lg:items-start gap-4 lg:gap-8 shrink-0 w-full lg:w-auto overflow-x-auto pb-4 lg:pb-0 scrollbar-hide">
             {PRICING_PLANS.map((plan, idx) => (
-              <button
+              <motion.button
                 key={idx}
                 onClick={() => setSelectedIdx(idx)}
-                className={`text-2xl md:text-7xl font-black font-space uppercase tracking-tighter transition-all duration-500 text-left relative ${
+                className={`flex-shrink-0 text-lg md:text-4xl lg:text-6xl font-light font-serif uppercase tracking-widest transition-all duration-500 text-left relative px-4 lg:px-0 ${
                   selectedIdx === idx 
-                    ? 'text-white scale-110 lg:translate-x-6 neon-text' 
-                    : 'text-slate-800 hover:text-slate-700'
+                    ? 'text-[#62b4e0] scale-105 lg:translate-x-4' 
+                    : 'text-neutral-700 hover:text-neutral-500'
                 }`}
               >
                 {plan.slug}
-                {selectedIdx === idx && <span className="absolute -left-4 lg:-left-10 top-1/2 -translate-y-1/2 w-3 h-3 rounded-full bg-sky-500 hidden lg:block"></span>}
-              </button>
+                {selectedIdx === idx && (
+                  <motion.span 
+                    layoutId="activeIndicator"
+                    className="absolute -left-2 lg:-left-8 top-1/2 -translate-y-1/2 w-1.5 h-1.5 rounded-full bg-[#62b4e0] hidden lg:block"
+                  />
+                )}
+              </motion.button>
             ))}
           </div>
 
-          <div className="reveal flex-grow w-full" style={{ transitionDelay: '0.1s' }}>
-            <div 
-              className="p-10 lg:p-20 rounded-extreme glass border-white/5 transition-all duration-700 relative overflow-hidden flex flex-col min-h-[460px]"
-              style={{ 
-                boxShadow: `0 50px 120px -20px rgba(0,0,0,0.6), 0 0 80px ${getGlowColor(activePlan.color).replace('0.5', '0.04')}`
-              }}
-            >
-              <div 
+          {/* Plan Card */}
+          <div className="flex-grow w-full max-w-3xl">
+            <AnimatePresence mode="wait">
+              <motion.div 
                 key={activePlan.slug}
-                className="animate-in-smooth flex flex-col h-full"
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -20 }}
+                transition={{ duration: 0.5, ease: [0.23, 1, 0.32, 1] }}
+                className="p-8 lg:p-16 rounded-[3rem] bg-white/[0.02] backdrop-blur-2xl border border-white/10 shadow-2xl relative overflow-hidden flex flex-col"
               >
-                <div className="relative z-10 mb-10">
-                  <div className="flex justify-between items-center mb-6">
-                    <h2 className="text-4xl md:text-8xl font-black font-space text-white leading-none uppercase tracking-tighter">
-                      {activePlan.name}
-                    </h2>
+                <div className="relative z-10 mb-12">
+                  <div className="flex flex-col md:flex-row md:items-center justify-between gap-6 mb-8">
+                    <div>
+                      <h2 className="text-4xl md:text-6xl font-light font-serif text-white uppercase tracking-[0.2em] mb-2">
+                        {activePlan.name}
+                      </h2>
+                      <p className="text-2xl md:text-3xl font-light text-[#62b4e0] font-serif tracking-widest">
+                        {activePlan.price}
+                      </p>
+                    </div>
                     {activePlan.highlight && (
-                      <span className="px-5 py-2 bg-white/10 backdrop-blur-md text-sky-400 text-[10px] font-black uppercase tracking-[0.3em] rounded-full border border-sky-400/20">
-                        Top Tanlov
-                      </span>
+                      <motion.div 
+                        animate={{ opacity: [0.5, 1, 0.5] }}
+                        transition={{ duration: 3, repeat: Infinity }}
+                        className="self-start px-6 py-2 bg-[#62b4e0]/10 text-[#62b4e0] text-[10px] font-bold uppercase tracking-[0.4em] rounded-full border border-[#62b4e0]/20"
+                      >
+                        Premium Tanlov
+                      </motion.div>
                     )}
                   </div>
-                  <p className="text-2xl md:text-4xl font-bold text-sky-500 font-space tracking-tight mb-6">
-                    {activePlan.price}
-                  </p>
-                  <p className="text-sm md:text-xl text-slate-400 font-medium leading-relaxed max-w-xl">
+                  <p className="text-lg text-neutral-400 font-light leading-relaxed max-w-xl">
                     {activePlan.description}
                   </p>
                 </div>
 
-                <div className="relative z-10 flex-grow mb-16">
-                  <ul className="grid sm:grid-cols-2 gap-6">
+                <div className="relative z-10 flex-grow mb-12">
+                  <ul className="grid sm:grid-cols-2 gap-8">
                     {activePlan.features.map((feature, fIdx) => (
-                      <li key={fIdx} className="flex items-start gap-4">
-                        <div className="w-6 h-6 rounded-full bg-sky-500/20 flex items-center justify-center shrink-0 mt-0.5">
-                           <svg className="w-4 h-4 text-sky-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={4} d="M5 13l4 4L19 7" />
-                           </svg>
+                      <motion.li 
+                        key={fIdx} 
+                        initial={{ opacity: 0, x: -10 }}
+                        animate={{ opacity: 1, x: 0 }}
+                        transition={{ delay: fIdx * 0.1 }}
+                        className="flex items-start gap-4"
+                      >
+                        <div className="w-5 h-5 rounded-full bg-[#62b4e0]/10 flex items-center justify-center shrink-0 mt-1">
+                           <Check className="w-3 h-3 text-[#62b4e0]" strokeWidth={3} />
                         </div>
-                        <span className="text-sm md:text-lg font-medium text-slate-300">{feature}</span>
-                      </li>
+                        <span className="text-base text-neutral-300 font-light tracking-wide leading-snug">{feature}</span>
+                      </motion.li>
                     ))}
                   </ul>
                 </div>
 
                 <div className="relative z-10">
-                  <a 
+                  <motion.a 
+                    whileHover={{ scale: 1.02, backgroundColor: '#62b4e0', color: '#000' }}
+                    whileTap={{ scale: 0.98 }}
                     href={`https://t.me/poktil_bot?start=subscription`}
-                    className={`inline-flex items-center justify-center w-full md:w-auto px-16 py-6 rounded-full text-white font-black text-sm md:text-xl transition-all shadow-2xl uppercase tracking-[0.2em] transform active:scale-95 ${getButtonColor(activePlan.color)}`}
+                    className={`inline-flex items-center justify-center w-full md:w-auto px-12 py-5 rounded-[2rem] text-white border font-bold text-xs transition-all uppercase tracking-[0.3em] ${getButtonColor(activePlan.color)}`}
                   >
                     Obuna bo'lish
-                  </a>
+                  </motion.a>
                 </div>
-              </div>
-            </div>
+
+                {/* Background Icon Watermark */}
+                <div className="absolute -bottom-12 -right-12 opacity-[0.03] text-white transform -rotate-12 scale-[2.5] pointer-events-none">
+                  {activePlan.icon}
+                </div>
+              </motion.div>
+            </AnimatePresence>
           </div>
 
         </div>
