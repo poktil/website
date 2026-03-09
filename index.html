@@ -14,7 +14,14 @@
       :root {
         --header-h: 100px;
         --accent: #62b4e0;
-        --bg: #0a0a0a;
+        --bg: #ffffff;
+        --text: #0a0a0a;
+      }
+      @media (prefers-color-scheme: dark) {
+        :root {
+          --bg: #0a0a0a;
+          --text: #f8fafc;
+        }
       }
       @media (max-width: 768px) {
         :root {
@@ -26,8 +33,9 @@
         margin: 0;
         padding: 20px;
         background-color: var(--bg);
-        color: #f8fafc;
+        color: var(--text);
         overflow-x: hidden;
+        transition: background-color 0.3s ease, color 0.3s ease;
       }
       @media (max-width: 768px) {
         body {
@@ -107,7 +115,7 @@
 </script>
 <link rel="stylesheet" href="/index.css">
 </head>
-  <body class="bg-neutral-950 text-neutral-100">
+  <body>
     <div class="grain"></div>
     <div id="root"></div>
   <script type="module" src="/index.tsx"></script>

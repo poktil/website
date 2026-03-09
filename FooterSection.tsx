@@ -13,8 +13,8 @@ const FooterSection: React.FC = () => {
   };
 
   return (
-    <section id="footer" className="snap-section bg-neutral-950 text-white px-4 md:px-8 relative py-24">
-      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full h-px bg-gradient-to-r from-transparent via-white/10 to-transparent"></div>
+    <section id="footer" className="snap-section bg-white dark:bg-neutral-950 text-neutral-900 dark:text-white px-4 md:px-8 relative py-24 transition-colors duration-300">
+      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full h-px bg-gradient-to-r from-transparent via-black/10 dark:via-white/10 to-transparent"></div>
       
       <div className="snap-content relative z-10">
         <div className="max-w-7xl mx-auto w-full grid md:grid-cols-2 gap-24 items-start">
@@ -26,27 +26,27 @@ const FooterSection: React.FC = () => {
             <div className="flex items-center space-x-6 mb-12">
                <h2 className="text-5xl font-light font-serif tracking-[0.2em] uppercase">Poktil</h2>
             </div>
-            <h3 className="text-4xl md:text-5xl font-light mb-10 text-neutral-300 leading-tight font-serif italic">
+            <h3 className="text-4xl md:text-5xl font-light mb-10 text-neutral-600 dark:text-neutral-300 leading-tight font-serif italic">
               Guruh muloqotini <br />
               <span className="text-[#62b4e0]">yangi bosqichga</span> olib chiqing.
             </h3>
-            <p className="text-neutral-500 text-lg mb-12 max-w-md font-light leading-relaxed">
+            <p className="text-neutral-600 dark:text-neutral-500 text-lg mb-12 max-w-md font-light leading-relaxed">
               Poktil — faqat bot emas, u sizning virtual madaniyat posboningiz. 24/7 xizmatda.
             </p>
             <div className="flex flex-wrap gap-8">
               <motion.a 
-                whileHover={{ scale: 1.02, backgroundColor: '#62b4e0', color: '#000' }}
+                whileHover={{ scale: 1.02, backgroundColor: '#62b4e0', color: '#fff' }}
                 whileTap={{ scale: 0.98 }}
                 href="https://t.me/poktil_bot" 
-                className="px-12 py-5 bg-white/5 border border-white/10 rounded-[2rem] font-bold uppercase tracking-widest text-[10px] transition-all"
+                className="px-12 py-5 bg-black/5 dark:bg-white/5 border border-black/10 dark:border-white/10 rounded-[2rem] font-bold uppercase tracking-widest text-[10px] transition-all"
               >
                 Botga o'tish
               </motion.a>
               <motion.a 
-                whileHover={{ scale: 1.02, backgroundColor: 'rgba(255,255,255,0.05)' }}
+                whileHover={{ scale: 1.02, backgroundColor: 'rgba(0,0,0,0.05)' }}
                 whileTap={{ scale: 0.98 }}
                 href="https://akbarswe.uz" 
-                className="px-12 py-5 bg-transparent border border-white/10 rounded-[2rem] font-bold uppercase tracking-widest text-[10px] transition-all"
+                className="px-12 py-5 bg-transparent border border-black/10 dark:border-white/10 rounded-[2rem] font-bold uppercase tracking-widest text-[10px] transition-all"
               >
                 Bog'lanish
               </motion.a>
@@ -61,19 +61,19 @@ const FooterSection: React.FC = () => {
           >
             <div>
               <h4 className="text-[#62b4e0] font-bold text-[10px] uppercase tracking-[0.5em] mb-10">Navigatsiya</h4>
-              <ul className="space-y-6 text-neutral-500 font-light text-sm tracking-widest">
-                <li><button onClick={() => document.getElementById('hero')?.scrollIntoView({behavior: 'smooth'})} className="hover:text-white transition-colors uppercase">Bosh sahifa</button></li>
-                <li><button onClick={() => document.getElementById('narxlar')?.scrollIntoView({behavior: 'smooth'})} className="hover:text-white transition-colors uppercase">Narxlar</button></li>
-                <li><button onClick={() => document.getElementById('xususiyatlar')?.scrollIntoView({behavior: 'smooth'})} className="hover:text-white transition-colors uppercase">Imkoniyatlar</button></li>
-                <li><button onClick={() => document.getElementById('qollanma')?.scrollIntoView({behavior: 'smooth'})} className="hover:text-white transition-colors uppercase">Qo'llanma</button></li>
+              <ul className="space-y-6 text-neutral-600 dark:text-neutral-500 font-light text-sm tracking-widest">
+                <li><button onClick={() => document.getElementById('hero')?.scrollIntoView({behavior: 'smooth'})} className="hover:text-neutral-900 dark:hover:text-white transition-colors uppercase">Bosh sahifa</button></li>
+                <li><button onClick={() => document.getElementById('narxlar')?.scrollIntoView({behavior: 'smooth'})} className="hover:text-neutral-900 dark:hover:text-white transition-colors uppercase">Narxlar</button></li>
+                <li><button onClick={() => document.getElementById('xususiyatlar')?.scrollIntoView({behavior: 'smooth'})} className="hover:text-neutral-900 dark:hover:text-white transition-colors uppercase">Imkoniyatlar</button></li>
+                <li><button onClick={() => document.getElementById('qollanma')?.scrollIntoView({behavior: 'smooth'})} className="hover:text-neutral-900 dark:hover:text-white transition-colors uppercase">Qo'llanma</button></li>
               </ul>
             </div>
             <div>
-              <h4 className="text-neutral-300 font-bold text-[10px] uppercase tracking-[0.5em] mb-10">Ijtimoiy</h4>
-              <ul className="space-y-6 text-neutral-500 font-light text-sm tracking-widest">
+              <h4 className="text-neutral-400 dark:text-neutral-300 font-bold text-[10px] uppercase tracking-[0.5em] mb-10">Ijtimoiy</h4>
+              <ul className="space-y-6 text-neutral-600 dark:text-neutral-500 font-light text-sm tracking-widest">
                 {SOCIAL_LINKS.map((social, idx) => (
                   <li key={idx}>
-                    <a href={social.link} className="hover:text-white transition-colors flex items-center gap-3 uppercase">
+                    <a href={social.link} className="hover:text-neutral-900 dark:hover:text-white transition-colors flex items-center gap-3 uppercase">
                       {getIcon(social.name)}
                       {social.name.split(' ')[0]}
                     </a>
@@ -84,11 +84,11 @@ const FooterSection: React.FC = () => {
           </motion.div>
         </div>
 
-        <div className="mt-32 pt-12 border-t border-white/5 flex flex-col md:flex-row justify-between items-center gap-8">
-           <p className="text-[9px] font-bold uppercase tracking-[0.6em] text-neutral-700">© 2026 POKTIL PROJECT • BARCHA HUQUQLAR HIMOAYALANGAN</p>
+        <div className="mt-32 pt-12 border-t border-black/5 dark:border-white/5 flex flex-col md:flex-row justify-between items-center gap-8">
+           <p className="text-[9px] font-bold uppercase tracking-[0.6em] text-neutral-400 dark:text-neutral-700">© 2026 POKTIL PROJECT • BARCHA HUQUQLAR HIMOAYALANGAN</p>
            <div className="flex items-center gap-4">
              <Crown className="w-4 h-4 text-[#62b4e0] opacity-20" />
-             <p className="text-[9px] font-bold uppercase tracking-[0.6em] text-neutral-700">
+             <p className="text-[9px] font-bold uppercase tracking-[0.6em] text-neutral-400 dark:text-neutral-700">
                MADE BY <a href="https://akbarswe.uz" className="hover:text-[#62b4e0] transition-colors">AKBAR</a>
              </p>
            </div>

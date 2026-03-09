@@ -20,7 +20,7 @@ export const Hero: React.FC = () => {
   const rotateY = useSpring(useTransform(mouseX, [-0.5, 0.5], [-10, 10]), { stiffness: 100, damping: 30 });
 
   return (
-    <section id="hero" className="snap-section bg-neutral-950 px-4 md:px-8 relative overflow-hidden">
+    <section id="hero" className="snap-section bg-white dark:bg-neutral-950 px-4 md:px-8 relative overflow-hidden transition-colors duration-300">
       {/* Elegant Background Ambient Effects */}
       <div className="absolute inset-0 pointer-events-none">
         <motion.div 
@@ -33,7 +33,7 @@ export const Hero: React.FC = () => {
         />
         
         {/* Subtle Grid Pattern */}
-        <div className="absolute inset-0 bg-[linear-gradient(to_right,#ffffff05_1px,transparent_1px),linear-gradient(to_bottom,#ffffff05_1px,transparent_1px)] bg-[size:60px_60px] [mask-image:radial-gradient(ellipse_80%_50%_at_50%_0%,#000_70%,transparent_100%)]"></div>
+        <div className="absolute inset-0 bg-[linear-gradient(to_right,#00000005_1px,transparent_1px),linear-gradient(to_bottom,#00000005_1px,transparent_1px)] dark:bg-[linear-gradient(to_right,#ffffff05_1px,transparent_1px),linear-gradient(to_bottom,#ffffff05_1px,transparent_1px)] bg-[size:60px_60px] [mask-image:radial-gradient(ellipse_80%_50%_at_50%_0%,#000_70%,transparent_100%)]"></div>
       </div>
       
       <div className="snap-content relative z-10">
@@ -50,13 +50,13 @@ export const Hero: React.FC = () => {
               initial={{ opacity: 0, scale: 0.9 }}
               animate={{ opacity: 1, scale: 1 }}
               transition={{ delay: 0.2 }}
-              className="inline-flex items-center px-5 py-2 rounded-full bg-white/5 border border-white/10 text-[#62b4e0] text-[11px] font-medium mb-10 tracking-[0.4em] uppercase mx-auto lg:mx-0"
+              className="inline-flex items-center px-5 py-2 rounded-full bg-black/5 dark:bg-white/5 border border-black/10 dark:border-white/10 text-[#62b4e0] text-[11px] font-medium mb-10 tracking-[0.4em] uppercase mx-auto lg:mx-0"
             >
               <Sparkles className="w-3 h-3 mr-3" />
               Toza muloqot davri boshlandi
             </motion.div>
             
-            <h1 className="text-5xl md:text-8xl lg:text-[10rem] font-light text-white mb-10 leading-[0.85] font-serif tracking-tight">
+            <h1 className="text-5xl md:text-8xl lg:text-[10rem] font-light text-neutral-900 dark:text-white mb-10 leading-[0.85] font-serif tracking-tight">
               Toza til <br />
               <motion.span 
                 initial={{ opacity: 0 }}
@@ -68,17 +68,17 @@ export const Hero: React.FC = () => {
               </motion.span>
             </h1>
             
-            <p className="text-lg md:text-xl text-neutral-400 mb-12 max-w-xl leading-relaxed font-light mx-auto lg:mx-0">
+            <p className="text-lg md:text-xl text-neutral-500 dark:text-neutral-400 mb-12 max-w-xl leading-relaxed font-light mx-auto lg:mx-0">
               O'zbek tilidagi birinchi AI asosidagi haqorat detektori. 
               Guruhlaringizni aqlli filtr bilan himoya qiling va madaniyatli muloqotni ta'minlang.
             </p>
             
             <div className="flex flex-wrap justify-center lg:justify-start gap-8">
               <motion.a 
-                whileHover={{ scale: 1.02, backgroundColor: '#62b4e0', color: '#000' }}
+                whileHover={{ scale: 1.02, backgroundColor: '#62b4e0', color: '#fff' }}
                 whileTap={{ scale: 0.98 }}
                 href="https://t.me/poktil_bot" 
-                className="group relative px-12 py-5 bg-white text-black rounded-[2rem] font-bold text-sm shadow-2xl overflow-hidden transition-all uppercase tracking-[0.2em]"
+                className="group relative px-12 py-5 bg-neutral-900 dark:bg-white text-white dark:text-black rounded-[2rem] font-bold text-sm shadow-2xl overflow-hidden transition-all uppercase tracking-[0.2em]"
               >
                 <span className="relative flex items-center">
                   Hoziroq Start <ArrowRight className="ml-3 w-4 h-4" />
@@ -86,10 +86,10 @@ export const Hero: React.FC = () => {
               </motion.a>
               
               <motion.button 
-                whileHover={{ scale: 1.02, backgroundColor: "rgba(255,255,255,0.05)" }}
+                whileHover={{ scale: 1.02, backgroundColor: "rgba(0,0,0,0.05)" }}
                 whileTap={{ scale: 0.98 }}
                 onClick={() => document.getElementById('nega')?.scrollIntoView({ behavior: 'smooth' })}
-                className="px-12 py-5 bg-transparent border border-white/10 text-white rounded-[2rem] font-bold text-sm transition-all uppercase tracking-[0.2em]"
+                className="px-12 py-5 bg-transparent border border-black/10 dark:border-white/10 text-neutral-900 dark:text-white rounded-[2rem] font-bold text-sm transition-all uppercase tracking-[0.2em]"
               >
                 Tanishish
               </motion.button>
@@ -123,7 +123,7 @@ export const Hero: React.FC = () => {
                   ></motion.div>
                   
                   {/* Inner Core */}
-                  <div className="absolute inset-6 bg-neutral-900/40 backdrop-blur-3xl rounded-[3.5rem] border border-white/10 shadow-2xl flex items-center justify-center overflow-hidden">
+                  <div className="absolute inset-6 bg-neutral-100/40 dark:bg-neutral-900/40 backdrop-blur-3xl rounded-[3.5rem] border border-black/10 dark:border-white/10 shadow-2xl flex items-center justify-center overflow-hidden">
                     {/* Scanning Line */}
                     <motion.div 
                       animate={{ top: ['-10%', '110%'] }}
@@ -160,14 +160,14 @@ export const Hero: React.FC = () => {
               <motion.div 
                 animate={{ y: [0, 10, 0] }}
                 transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
-                className="absolute -top-6 -right-6 p-5 bg-neutral-900/80 backdrop-blur-xl border border-white/10 rounded-[2rem] shadow-2xl rotate-6"
+                className="absolute -top-6 -right-6 p-5 bg-white/80 dark:bg-neutral-900/80 backdrop-blur-xl border border-black/10 dark:border-white/10 rounded-[2rem] shadow-2xl rotate-6"
               >
                 <Crown className="w-6 h-6 text-[#62b4e0]" />
               </motion.div>
               <motion.div 
                 animate={{ y: [0, -10, 0] }}
                 transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
-                className="absolute -bottom-6 -left-6 p-5 bg-neutral-900/80 backdrop-blur-xl border border-white/10 rounded-[2rem] shadow-2xl -rotate-6"
+                className="absolute -bottom-6 -left-6 p-5 bg-white/80 dark:bg-neutral-900/80 backdrop-blur-xl border border-black/10 dark:border-white/10 rounded-[2rem] shadow-2xl -rotate-6"
               >
                 <MessageSquare className="w-6 h-6 text-[#62b4e0]" />
               </motion.div>

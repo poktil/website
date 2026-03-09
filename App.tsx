@@ -11,11 +11,11 @@ const HowItWorksSection = lazy(() => import('./HowItWorksSection'));
 const FooterSection = lazy(() => import('./FooterSection'));
 
 const SectionFallback = () => (
-  <div className="h-screen w-full flex items-center justify-center bg-neutral-950">
+  <div className="h-screen w-full flex items-center justify-center bg-white dark:bg-neutral-950">
     <motion.div 
       animate={{ rotate: 360, scale: [1, 1.2, 1] }}
       transition={{ duration: 2, repeat: Infinity, ease: "linear" }}
-      className="w-12 h-12 border-2 border-[#d4af37]/20 border-t-[#d4af37] rounded-full"
+      className="w-12 h-12 border-2 border-[#62b4e0]/20 border-t-[#62b4e0] rounded-full"
     />
   </div>
 );
@@ -41,7 +41,7 @@ const App: React.FC = () => {
   }, []);
 
   return (
-    <div className="bg-neutral-950 text-neutral-100 selection:bg-[#62b4e0]/30 selection:text-white">
+    <div className="bg-white dark:bg-neutral-950 text-neutral-900 dark:text-neutral-100 selection:bg-[#62b4e0]/30 selection:text-[#62b4e0] dark:selection:text-white transition-colors duration-300">
       <Header />
       
       <main className="main-container overflow-x-hidden">

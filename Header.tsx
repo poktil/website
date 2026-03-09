@@ -25,14 +25,14 @@ export const Header: React.FC = () => {
 
   return (
     <header className={`fixed top-0 left-1/2 -translate-x-1/2 w-[calc(100%-32px)] md:w-[calc(100%-64px)] z-50 transition-all duration-700 ${isScrolled ? 'py-4' : 'py-8'}`}>
-      <div className={`max-w-7xl mx-auto flex items-center justify-between transition-all duration-700 bg-white/5 backdrop-blur-xl border border-white/10 py-4 px-8 rounded-[2rem] shadow-2xl`}>
+      <div className={`max-w-7xl mx-auto flex items-center justify-between transition-all duration-700 bg-black/5 dark:bg-white/5 backdrop-blur-xl border border-black/10 dark:border-white/10 py-4 px-8 rounded-[2rem] shadow-2xl`}>
         
         <motion.div 
           whileHover={{ scale: 1.02 }}
           className="flex items-center space-x-4 cursor-pointer group" 
           onClick={() => scrollTo('hero')}
         >
-          <span className="text-3xl font-light tracking-[0.3em] text-white font-serif uppercase">
+          <span className="text-3xl font-light tracking-[0.3em] text-neutral-900 dark:text-white font-serif uppercase">
             Poktil
           </span>
         </motion.div>
@@ -48,7 +48,7 @@ export const Header: React.FC = () => {
               key={idx} 
               whileHover={{ y: -1, color: '#62b4e0' }}
               onClick={() => scrollTo(item.id)}
-              className="text-[11px] font-medium text-neutral-400 transition-colors uppercase tracking-[0.4em]"
+              className="text-[11px] font-medium text-neutral-500 dark:text-neutral-400 transition-colors uppercase tracking-[0.4em]"
             >
               {item.label}
             </motion.button>
@@ -60,14 +60,14 @@ export const Header: React.FC = () => {
             whileHover={{ scale: 1.02, backgroundColor: '#62b4e0', color: '#000' }}
             whileTap={{ scale: 0.98 }}
             href="https://t.me/poktil_bot" 
-            className="hidden md:flex items-center gap-2 px-8 py-3 bg-white/10 text-white border border-white/20 rounded-2xl font-medium text-[11px] uppercase tracking-[0.3em] transition-all"
+            className="hidden md:flex items-center gap-2 px-8 py-3 bg-black/10 dark:bg-white/10 text-neutral-900 dark:text-white border border-black/20 dark:border-white/20 rounded-2xl font-medium text-[11px] uppercase tracking-[0.3em] transition-all"
           >
             <Send className="w-3 h-3" />
             Botni ochish
           </motion.a>
           
           <button 
-            className="lg:hidden text-white p-2"
+            className="lg:hidden text-neutral-900 dark:text-white p-2"
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
           >
             {isMobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
@@ -83,10 +83,10 @@ export const Header: React.FC = () => {
             animate={{ opacity: 1, x: 0 }}
             exit={{ opacity: 0, x: '100%' }}
             transition={{ type: 'spring', damping: 25, stiffness: 200 }}
-            className="fixed inset-0 w-full h-screen bg-neutral-950 z-[60] flex flex-col items-center justify-center p-8"
+            className="fixed inset-0 w-full h-screen bg-white dark:bg-neutral-950 z-[60] flex flex-col items-center justify-center p-8"
           >
             <button 
-              className="absolute top-8 right-8 text-white p-2"
+              className="absolute top-8 right-8 text-neutral-900 dark:text-white p-2"
               onClick={() => setIsMobileMenuOpen(false)}
             >
               <X className="w-8 h-8" />
@@ -105,7 +105,7 @@ export const Header: React.FC = () => {
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: idx * 0.1 }}
                   onClick={() => scrollTo(item.id)}
-                  className="flex items-center gap-4 text-2xl font-light text-neutral-300 hover:text-white transition-colors uppercase tracking-[0.5em] font-serif"
+                  className="flex items-center gap-4 text-2xl font-light text-neutral-600 dark:text-neutral-300 hover:text-neutral-900 dark:hover:text-white transition-colors uppercase tracking-[0.5em] font-serif"
                 >
                   <span className="text-[#62b4e0]">{item.icon}</span>
                   {item.label}
