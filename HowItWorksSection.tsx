@@ -12,7 +12,7 @@ const HowItWorksSection: React.FC = () => {
   }, []);
 
   return (
-    <section id="qollanma" className="snap-section bg-neutral-950 px-4 md:px-8 relative overflow-hidden py-24">
+    <section id="qollanma" className="snap-section bg-white dark:bg-neutral-950 px-4 md:px-8 relative overflow-hidden py-24 transition-colors duration-300">
       <div className="snap-content relative z-10">
         <div className="max-w-7xl mx-auto w-full relative z-10">
           <div className="grid lg:grid-cols-2 gap-20 md:gap-32 items-center">
@@ -23,7 +23,7 @@ const HowItWorksSection: React.FC = () => {
               viewport={{ once: true }}
               transition={{ duration: 0.8 }}
             >
-              <h2 className="text-6xl md:text-8xl font-light mb-16 font-serif leading-tight tracking-tight text-white">
+              <h2 className="text-6xl md:text-8xl font-light mb-16 font-serif leading-tight tracking-tight text-neutral-900 dark:text-white">
                 Boshlash <br />
                 juda <span className="text-[#62b4e0] italic">oson.</span>
               </h2>
@@ -37,14 +37,14 @@ const HowItWorksSection: React.FC = () => {
                     transition={{ delay: idx * 0.2 }}
                     className="flex gap-10 group"
                   >
-                    <div className="shrink-0 w-16 h-16 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center text-xl font-light font-serif text-neutral-500 group-hover:border-[#62b4e0] group-hover:text-[#62b4e0] transition-all duration-500 shadow-2xl">
+                    <div className="shrink-0 w-16 h-16 rounded-2xl bg-black/5 dark:bg-white/5 border border-black/10 dark:border-white/10 flex items-center justify-center text-xl font-light font-serif text-neutral-400 dark:text-neutral-500 group-hover:border-[#62b4e0] group-hover:text-[#62b4e0] transition-all duration-500 shadow-2xl">
                       0{step.number}
                     </div>
                     <div>
-                      <h3 className="text-2xl font-bold mb-3 font-serif text-white group-hover:text-[#62b4e0] transition-colors tracking-wide">
+                      <h3 className="text-2xl font-bold mb-3 font-serif text-neutral-900 dark:text-white group-hover:text-[#62b4e0] transition-colors tracking-wide">
                         {step.title}
                       </h3>
-                      <p className="text-lg text-neutral-500 max-w-sm leading-relaxed font-light">
+                      <p className="text-lg text-neutral-600 dark:text-neutral-500 max-w-sm leading-relaxed font-light">
                         {step.description}
                       </p>
                     </div>
@@ -60,7 +60,7 @@ const HowItWorksSection: React.FC = () => {
               transition={{ duration: 1 }}
               className="relative"
             >
-               <div className="relative p-6 rounded-[3.5rem] bg-white/[0.02] border border-white/10 shadow-2xl backdrop-blur-3xl overflow-hidden group aspect-square flex items-center justify-center">
+               <div className="relative p-6 rounded-[3.5rem] bg-black/[0.02] dark:bg-white/[0.02] border border-black/10 dark:border-white/10 shadow-2xl backdrop-blur-3xl overflow-hidden group aspect-square flex items-center justify-center">
                   <div className="relative w-full h-full flex items-center justify-center perspective-1000">
                     {/* Creative 3D Animation: Floating Geometric Core */}
                     <motion.div 
@@ -81,7 +81,7 @@ const HowItWorksSection: React.FC = () => {
                           key={i}
                           animate={{ rotateZ: [0, 360] }}
                           transition={{ duration: 10 + i * 5, repeat: Infinity, ease: "linear" }}
-                          className="absolute inset-0 border border-white/10 rounded-[3rem]"
+                          className="absolute inset-0 border border-black/10 dark:border-white/10 rounded-[3rem]"
                           style={{ 
                             transform: `rotateX(${i * 60}deg) rotateY(${i * 45}deg)`,
                             transformStyle: 'preserve-3d'

@@ -25,7 +25,7 @@ const PricingSection: React.FC = () => {
   };
 
   return (
-    <section id="narxlar" className="snap-section bg-neutral-950 px-4 md:px-8 relative overflow-hidden py-24">
+    <section id="narxlar" className="snap-section bg-white dark:bg-neutral-950 px-4 md:px-8 relative overflow-hidden py-24 transition-colors duration-300">
       <motion.div 
         animate={{ 
           backgroundColor: getGlowColor(activePlan.color).replace('0.5', '0.03')
@@ -45,7 +45,7 @@ const PricingSection: React.FC = () => {
                 className={`flex-shrink-0 text-lg md:text-4xl lg:text-6xl font-light font-serif uppercase tracking-widest transition-all duration-500 text-left relative px-4 lg:px-0 ${
                   selectedIdx === idx 
                     ? 'text-[#62b4e0] scale-105 lg:translate-x-4' 
-                    : 'text-neutral-700 hover:text-neutral-500'
+                    : 'text-neutral-300 dark:text-neutral-700 hover:text-neutral-500 dark:hover:text-neutral-500'
                 }`}
               >
                 {plan.slug}
@@ -68,12 +68,12 @@ const PricingSection: React.FC = () => {
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, y: -20 }}
                 transition={{ duration: 0.5, ease: [0.23, 1, 0.32, 1] }}
-                className="p-8 lg:p-16 rounded-[3rem] bg-white/[0.02] backdrop-blur-2xl border border-white/10 shadow-2xl relative overflow-hidden flex flex-col"
+                className="p-8 lg:p-16 rounded-[3rem] bg-black/[0.02] dark:bg-white/[0.02] backdrop-blur-2xl border border-black/10 dark:border-white/10 shadow-2xl relative overflow-hidden flex flex-col"
               >
                 <div className="relative z-10 mb-12">
                   <div className="flex flex-col md:flex-row md:items-center justify-between gap-6 mb-8">
                     <div>
-                      <h2 className="text-4xl md:text-6xl font-light font-serif text-white uppercase tracking-[0.2em] mb-2">
+                      <h2 className="text-4xl md:text-6xl font-light font-serif text-neutral-900 dark:text-white uppercase tracking-[0.2em] mb-2">
                         {activePlan.name}
                       </h2>
                       <p className="text-2xl md:text-3xl font-light text-[#62b4e0] font-serif tracking-widest">
@@ -90,7 +90,7 @@ const PricingSection: React.FC = () => {
                       </motion.div>
                     )}
                   </div>
-                  <p className="text-lg text-neutral-400 font-light leading-relaxed max-w-xl">
+                  <p className="text-lg text-neutral-500 dark:text-neutral-400 font-light leading-relaxed max-w-xl">
                     {activePlan.description}
                   </p>
                 </div>
@@ -108,7 +108,7 @@ const PricingSection: React.FC = () => {
                         <div className="w-5 h-5 rounded-full bg-[#62b4e0]/10 flex items-center justify-center shrink-0 mt-1">
                            <Check className="w-3 h-3 text-[#62b4e0]" strokeWidth={3} />
                         </div>
-                        <span className="text-base text-neutral-300 font-light tracking-wide leading-snug">{feature}</span>
+                        <span className="text-base text-neutral-600 dark:text-neutral-300 font-light tracking-wide leading-snug">{feature}</span>
                       </motion.li>
                     ))}
                   </ul>
@@ -126,7 +126,7 @@ const PricingSection: React.FC = () => {
                 </div>
 
                 {/* Background Icon Watermark */}
-                <div className="absolute -bottom-12 -right-12 opacity-[0.03] text-white transform -rotate-12 scale-[2.5] pointer-events-none">
+                <div className="absolute -bottom-12 -right-12 opacity-[0.03] text-neutral-900 dark:text-white transform -rotate-12 scale-[2.5] pointer-events-none">
                   {activePlan.icon}
                 </div>
               </motion.div>
