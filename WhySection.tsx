@@ -5,14 +5,15 @@ import { Shield, Sparkles, Crown, Fingerprint } from 'lucide-react';
 
 const WhySection: React.FC = () => {
   return (
-    <section id="nega" className="snap-section bg-white dark:bg-neutral-950 px-4 md:px-8 relative overflow-hidden py-24 transition-colors duration-300">
-      <div className="snap-content relative z-10">
-        <div className="max-w-7xl mx-auto w-full grid lg:grid-cols-2 gap-20 items-center">
+    <section id="nega" className="snap-section bg-white dark:bg-neutral-950 px-6 md:px-12 relative overflow-hidden py-32 transition-colors duration-300">
+      <div className="snap-content relative z-10 w-full">
+        <div className="w-full grid lg:grid-cols-2 gap-20 md:gap-32 items-center">
           
           <motion.div 
-            initial={{ opacity: 0, scale: 0.95 }}
-            whileInView={{ opacity: 1, scale: 1 }}
+            initial={{ opacity: 0, scale: 0.95, filter: 'blur(15px)' }}
+            whileInView={{ opacity: 1, scale: 1, filter: 'blur(0px)' }}
             viewport={{ once: true }}
+            transition={{ duration: 1.2, ease: [0.22, 1, 0.36, 1] }}
             className="relative order-2 lg:order-1"
           >
             <div className="relative rounded-[3rem] overflow-hidden border border-black/10 dark:border-white/10 shadow-2xl aspect-video bg-neutral-100 dark:bg-neutral-900 group">
@@ -36,9 +37,10 @@ const WhySection: React.FC = () => {
           </motion.div>
 
           <motion.div 
-            initial={{ opacity: 0, x: 30 }}
-            whileInView={{ opacity: 1, x: 0 }}
+            initial={{ opacity: 0, x: 30, filter: 'blur(10px)' }}
+            whileInView={{ opacity: 1, x: 0, filter: 'blur(0px)' }}
             viewport={{ once: true }}
+            transition={{ duration: 1, ease: [0.22, 1, 0.36, 1] }}
             className="order-1 lg:order-2"
           >
             <h2 className="text-5xl md:text-7xl font-light mb-10 text-neutral-900 dark:text-white leading-tight font-serif">
@@ -58,8 +60,8 @@ const WhySection: React.FC = () => {
                   transition={{ delay: idx * 0.1 }}
                   className="flex gap-8 group"
                 >
-                  <div className="shrink-0 w-14 h-14 rounded-[2rem] bg-black/5 dark:bg-white/5 border border-black/10 dark:border-white/10 flex items-center justify-center text-[#62b4e0] group-hover:bg-[#62b4e0] group-hover:text-white dark:group-hover:text-black transition-all duration-500">
-                    {item.icon}
+                  <div className="shrink-0 w-16 h-16 rounded-[2.5rem] bg-[#62b4e0]/10 border border-[#62b4e0]/20 flex items-center justify-center text-[#62b4e0] group-hover:bg-[#62b4e0] group-hover:text-white dark:group-hover:text-black transition-all duration-500 shadow-[0_0_20px_rgba(98,180,224,0.1)]">
+                    {React.cloneElement(item.icon as React.ReactElement<any>, { className: "w-7 h-7" })}
                   </div>
                   <div>
                     <h4 className="text-xl font-bold mb-2 text-neutral-900 dark:text-white font-serif tracking-wide">{item.title}</h4>

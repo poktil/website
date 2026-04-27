@@ -13,15 +13,16 @@ const FooterSection: React.FC = () => {
   };
 
   return (
-    <section id="footer" className="snap-section bg-white dark:bg-neutral-950 text-neutral-900 dark:text-white px-4 md:px-8 relative py-24 transition-colors duration-300">
+    <section id="footer" className="snap-section bg-white dark:bg-neutral-950 text-neutral-900 dark:text-white px-6 md:px-12 relative py-32 transition-colors duration-300">
       <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full h-px bg-gradient-to-r from-transparent via-black/10 dark:via-white/10 to-transparent"></div>
       
-      <div className="snap-content relative z-10">
-        <div className="max-w-7xl mx-auto w-full grid md:grid-cols-2 gap-24 items-start">
+      <div className="snap-content relative z-10 w-full">
+        <div className="w-full grid md:grid-cols-2 gap-24 items-start">
           <motion.div 
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
+            initial={{ opacity: 0, y: 30, filter: 'blur(10px)' }}
+            whileInView={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
             viewport={{ once: true }}
+            transition={{ duration: 1 }}
           >
             <div className="flex items-center space-x-6 mb-12">
                <h2 className="text-5xl font-light font-serif tracking-[0.2em] uppercase">Poktil</h2>
@@ -38,7 +39,7 @@ const FooterSection: React.FC = () => {
                 whileHover={{ scale: 1.02, backgroundColor: '#62b4e0', color: '#fff' }}
                 whileTap={{ scale: 0.98 }}
                 href="https://t.me/poktil_bot" 
-                className="px-12 py-5 bg-black/5 dark:bg-white/5 border border-black/10 dark:border-white/10 rounded-[2rem] font-bold uppercase tracking-widest text-[10px] transition-all"
+                className="px-12 py-5 bg-[#62b4e0]/10 border border-[#62b4e0]/20 text-[#62b4e0] rounded-full font-bold uppercase tracking-widest text-[10px] transition-all shadow-[0_0_20px_rgba(98,180,224,0.1)]"
               >
                 Botga o'tish
               </motion.a>
@@ -46,7 +47,7 @@ const FooterSection: React.FC = () => {
                 whileHover={{ scale: 1.02, backgroundColor: 'rgba(0,0,0,0.05)' }}
                 whileTap={{ scale: 0.98 }}
                 href="https://akbarswe.uz" 
-                className="px-12 py-5 bg-transparent border border-black/10 dark:border-white/10 rounded-[2rem] font-bold uppercase tracking-widest text-[10px] transition-all"
+                className="px-12 py-5 bg-transparent border border-black/10 dark:border-white/10 text-neutral-900 dark:text-white rounded-full font-bold uppercase tracking-widest text-[10px] transition-all"
               >
                 Bog'lanish
               </motion.a>

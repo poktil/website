@@ -25,7 +25,7 @@ const PricingSection: React.FC = () => {
   };
 
   return (
-    <section id="narxlar" className="snap-section bg-white dark:bg-neutral-950 px-4 md:px-8 relative overflow-hidden py-24 transition-colors duration-300">
+    <section id="narxlar" className="snap-section bg-white dark:bg-neutral-950 px-6 md:px-12 relative overflow-hidden py-32 transition-colors duration-300">
       <motion.div 
         animate={{ 
           backgroundColor: getGlowColor(activePlan.color).replace('0.5', '0.03')
@@ -33,11 +33,17 @@ const PricingSection: React.FC = () => {
         className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full aspect-square rounded-full blur-[200px] pointer-events-none transition-colors duration-1000"
       />
       
-      <div className="snap-content relative z-10">
-        <div className="max-w-7xl mx-auto w-full flex flex-col lg:flex-row items-center gap-12 lg:gap-24">
+      <div className="snap-content relative z-10 w-full">
+        <div className="w-full flex flex-col lg:flex-row items-center gap-12 lg:gap-24">
           
           {/* Plan Selection - Improved for Mobile */}
-          <div className="flex flex-row lg:flex-col items-center lg:items-start gap-4 lg:gap-8 shrink-0 w-full lg:w-auto overflow-x-auto pb-4 lg:pb-0 scrollbar-hide">
+          <motion.div 
+            initial={{ opacity: 0, x: -30, filter: 'blur(10px)' }}
+            whileInView={{ opacity: 1, x: 0, filter: 'blur(0px)' }}
+            viewport={{ once: true }}
+            transition={{ duration: 1 }}
+            className="flex flex-row lg:flex-col items-center lg:items-start gap-4 lg:gap-8 shrink-0 w-full lg:w-auto overflow-x-auto pb-4 lg:pb-0 scrollbar-hide"
+          >
             {PRICING_PLANS.map((plan, idx) => (
               <motion.button
                 key={idx}
@@ -57,18 +63,21 @@ const PricingSection: React.FC = () => {
                 )}
               </motion.button>
             ))}
-          </div>
+          </motion.div>
 
           {/* Plan Card */}
-          <div className="flex-grow w-full max-w-3xl">
+          <div className="flex-grow w-full max-w-3xl min-h-[600px] relative">
             <AnimatePresence mode="wait">
               <motion.div 
                 key={activePlan.slug}
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: -20 }}
-                transition={{ duration: 0.5, ease: [0.23, 1, 0.32, 1] }}
-                className="p-8 lg:p-16 rounded-[3rem] bg-black/[0.02] dark:bg-white/[0.02] backdrop-blur-2xl border border-black/10 dark:border-white/10 shadow-2xl relative overflow-hidden flex flex-col"
+                initial={{ opacity: 0, y: 20, filter: 'blur(10px)' }}
+                animate={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
+                exit={{ opacity: 0, y: -20, filter: 'blur(10px)' }}
+                transition={{ 
+                  duration: 0.5, 
+                  ease: [0.22, 1, 0.36, 1]
+                }}
+                className="p-8 lg:p-16 rounded-[3rem] bg-black/[0.02] dark:bg-white/[0.02] backdrop-blur-2xl border border-black/10 dark:border-white/10 shadow-2xl relative overflow-hidden flex flex-col h-full"
               >
                 <div className="relative z-10 mb-12">
                   <div className="flex flex-col md:flex-row md:items-center justify-between gap-6 mb-8">
@@ -119,7 +128,7 @@ const PricingSection: React.FC = () => {
                     whileHover={{ scale: 1.02, backgroundColor: '#62b4e0', color: '#000' }}
                     whileTap={{ scale: 0.98 }}
                     href={`https://t.me/poktil_bot?start=subscription`}
-                    className={`inline-flex items-center justify-center w-full md:w-auto px-12 py-5 rounded-[2rem] text-white border font-bold text-xs transition-all uppercase tracking-[0.3em] ${getButtonColor(activePlan.color)}`}
+                    className={`inline-flex items-center justify-center w-full md:w-auto px-12 py-5 rounded-full text-white border font-bold text-xs transition-all uppercase tracking-[0.3em] ${getButtonColor(activePlan.color)}`}
                   >
                     Obuna bo'lish
                   </motion.a>
