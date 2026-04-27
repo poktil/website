@@ -5,13 +5,14 @@ import { FEATURES } from './constants';
 
 const FeaturesSection: React.FC = () => {
   return (
-    <section id="xususiyatlar" className="snap-section bg-white dark:bg-neutral-950 px-4 md:px-8 relative overflow-hidden py-24 transition-colors duration-300">
-      <div className="snap-content relative z-10">
-        <div className="max-w-7xl mx-auto w-full">
+    <section id="xususiyatlar" className="snap-section bg-white dark:bg-neutral-950 px-6 md:px-12 relative overflow-hidden py-32 transition-colors duration-300">
+      <div className="snap-content relative z-10 w-full">
+        <div className="w-full">
           <motion.div 
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
+            initial={{ opacity: 0, y: 30, filter: 'blur(15px)' }}
+            whileInView={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
             viewport={{ once: true }}
+            transition={{ duration: 1.2 }}
             className="text-center mb-24"
           >
             <h2 className="text-4xl md:text-8xl font-light mb-8 font-serif text-neutral-900 dark:text-white uppercase tracking-tight">Imkoniyatlar</h2>
@@ -33,9 +34,9 @@ const FeaturesSection: React.FC = () => {
               >
                 <motion.div 
                   whileHover={{ scale: 1.1, rotate: 5 }}
-                  className="w-16 h-16 rounded-[2rem] bg-[#62b4e0]/5 text-[#62b4e0] flex items-center justify-center mb-10 group-hover:bg-[#62b4e0] group-hover:text-white dark:group-hover:text-black transition-all duration-500 shadow-xl"
+                  className="w-20 h-20 rounded-[2.5rem] bg-[#62b4e0]/10 text-[#62b4e0] flex items-center justify-center mb-10 group-hover:bg-[#62b4e0] group-hover:text-white dark:group-hover:text-black transition-all duration-500 shadow-[0_0_30px_rgba(98,180,224,0.2)]"
                 >
-                  {feature.icon}
+                  {React.cloneElement(feature.icon as React.ReactElement<any>, { className: "w-8 h-8" })}
                 </motion.div>
                 <h3 className="text-2xl font-bold mb-5 font-serif text-neutral-900 dark:text-white group-hover:text-[#62b4e0] transition-colors tracking-wide">
                   {feature.title}

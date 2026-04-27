@@ -11,124 +11,188 @@ export const Header: React.FC = () => {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 50);
     };
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') {
+        setIsMobileMenuOpen(false);
+      }
+    };
     window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
+    window.addEventListener('keydown', handleKeyDown);
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+      window.removeEventListener('keydown', handleKeyDown);
+    };
   }, []);
 
   const scrollTo = (id: string) => {
     const el = document.getElementById(id);
     if (el) {
-      el.scrollIntoView({ behavior: 'smooth' });
+      const offset = 100; // Header height offset
+      const bodyRect = document.body.getBoundingClientRect().top;
+      const elementRect = el.getBoundingClientRect().top;
+      const elementPosition = elementRect - bodyRect;
+      const offsetPosition = elementPosition - offset;
+
+      window.scrollTo({
+        top: offsetPosition,
+        behavior: 'smooth'
+      });
     }
     setIsMobileMenuOpen(false);
   };
 
   return (
-    <header className={`fixed top-0 left-1/2 -translate-x-1/2 w-[calc(100%-32px)] md:w-[calc(100%-64px)] z-50 transition-all duration-700 ${isScrolled ? 'py-4' : 'py-8'}`}>
-      <div className={`max-w-7xl mx-auto flex items-center justify-between transition-all duration-700 bg-black/5 dark:bg-white/5 backdrop-blur-xl border border-black/10 dark:border-white/10 py-4 px-8 rounded-[2rem] shadow-2xl`}>
-        
-        <motion.div 
-          whileHover={{ scale: 1.02 }}
-          className="flex items-center space-x-4 cursor-pointer group" 
-          onClick={() => scrollTo('hero')}
-        >
-          <span className="text-3xl font-light tracking-[0.3em] text-neutral-900 dark:text-white font-serif uppercase">
-            Poktil
-          </span>
-        </motion.div>
-
-        <nav className="hidden lg:flex items-center space-x-12">
-          {[
-            { label: 'Nega?', id: 'nega' },
-            { label: 'Narxlar', id: 'narxlar' },
-            { label: 'Xususiyatlar', id: 'xususiyatlar' },
-            { label: 'Qo\'llanma', id: 'qollanma' }
-          ].map((item, idx) => (
-            <motion.button 
-              key={idx} 
-              whileHover={{ y: -1, color: '#62b4e0' }}
-              onClick={() => scrollTo(item.id)}
-              className="text-[11px] font-medium text-neutral-500 dark:text-neutral-400 transition-colors uppercase tracking-[0.4em]"
-            >
-              {item.label}
-            </motion.button>
-          ))}
-        </nav>
-
-        <div className="flex items-center space-x-6">
-          <motion.a 
-            whileHover={{ scale: 1.02, backgroundColor: '#62b4e0', color: '#000' }}
-            whileTap={{ scale: 0.98 }}
-            href="https://t.me/poktil_bot" 
-            className="hidden md:flex items-center gap-2 px-8 py-3 bg-black/10 dark:bg-white/10 text-neutral-900 dark:text-white border border-black/20 dark:border-white/20 rounded-2xl font-medium text-[11px] uppercase tracking-[0.3em] transition-all"
-          >
-            <Send className="w-3 h-3" />
-            Botni ochish
-          </motion.a>
-          
-          <button 
-            className="lg:hidden text-neutral-900 dark:text-white p-2"
-            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-          >
-            {isMobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
-          </button>
-        </div>
-      </div>
-
-      {/* Full Screen Mobile Menu */}
+    <>
+      {/* Background Backdrop Blur when Menu is Open */}
       <AnimatePresence>
         {isMobileMenuOpen && (
           <motion.div 
-            initial={{ opacity: 0, x: '100%' }}
-            animate={{ opacity: 1, x: 0 }}
-            exit={{ opacity: 0, x: '100%' }}
-            transition={{ type: 'spring', damping: 25, stiffness: 200 }}
-            className="fixed inset-0 w-full h-screen bg-white dark:bg-neutral-950 z-[60] flex flex-col items-center justify-center p-8"
-          >
-            <button 
-              className="absolute top-8 right-8 text-neutral-900 dark:text-white p-2"
-              onClick={() => setIsMobileMenuOpen(false)}
-            >
-              <X className="w-8 h-8" />
-            </button>
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ 
+              duration: 0.5,
+              ease: "easeInOut",
+              delay: isMobileMenuOpen ? 0 : 0.6 
+            }}
+            onClick={() => setIsMobileMenuOpen(false)}
+            className="fixed inset-0 bg-black/40 dark:bg-neutral-900/40 backdrop-blur-sm z-[45]"
+          />
+        )}
+      </AnimatePresence>
 
-            <div className="flex flex-col items-center space-y-12 w-full">
+      <header className="fixed top-0 left-0 w-full z-50 p-4 md:p-6 pointer-events-none">
+        <motion.div 
+          layout
+          initial={false}
+          transition={{ 
+            layout: { 
+              type: 'spring', 
+              damping: 30, 
+              stiffness: 300 
+            }
+          }}
+          className="w-full max-w-7xl mx-auto px-6 md:px-12 rounded-[2.5rem] bg-white/70 dark:bg-neutral-950/70 backdrop-blur-3xl border-2 border-black/10 dark:border-white/10 shadow-2xl pointer-events-auto overflow-hidden py-4"
+        >
+          {/* Top Row - Completely stable navigation bar */}
+          <div className="flex items-center justify-between w-full h-12">
+            <motion.div 
+              layout="position"
+              whileHover={{ scale: 1.02 }}
+              className="flex items-center space-x-4 cursor-pointer group" 
+              onClick={() => scrollTo('hero')}
+            >
+              <span className="text-3xl font-light tracking-[0.3em] text-neutral-900 dark:text-white font-serif uppercase">
+                Poktil
+              </span>
+            </motion.div>
+
+            <nav className="hidden lg:flex items-center space-x-12">
               {[
-                { label: 'Nega?', id: 'nega', icon: <Sparkles className="w-5 h-5" /> },
-                { label: 'Narxlar', id: 'narxlar', icon: <Gem className="w-5 h-5" /> },
-                { label: 'Xususiyatlar', id: 'xususiyatlar', icon: <Shield className="w-5 h-5" /> },
-                { label: 'Qo\'llanma', id: 'qollanma', icon: <Menu className="w-5 h-5" /> }
+                { label: 'Nega?', id: 'nega' },
+                { label: 'Narxlar', id: 'narxlar' },
+                { label: 'Xususiyatlar', id: 'xususiyatlar' },
+                { label: 'Qo\'llanma', id: 'qollanma' }
               ].map((item, idx) => (
                 <motion.button 
                   key={idx} 
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: idx * 0.1 }}
+                  layout="position"
+                  whileHover={{ y: -1, color: '#62b4e0' }}
                   onClick={() => scrollTo(item.id)}
-                  className="flex items-center gap-4 text-2xl font-light text-neutral-600 dark:text-neutral-300 hover:text-neutral-900 dark:hover:text-white transition-colors uppercase tracking-[0.5em] font-serif"
+                  className="text-[11px] font-medium text-neutral-500 dark:text-neutral-400 transition-colors uppercase tracking-[0.4em]"
                 >
-                  <span className="text-[#62b4e0]">{item.icon}</span>
                   {item.label}
                 </motion.button>
               ))}
-              
+            </nav>
+
+            <div className="flex items-center space-x-6">
               <motion.a 
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.4 }}
+                layout="position"
+                whileHover={{ scale: 1.02, backgroundColor: '#62b4e0', color: '#fff' }}
+                whileTap={{ scale: 0.98 }}
                 href="https://t.me/poktil_bot" 
-                className="w-full max-w-xs py-6 bg-[#62b4e0] text-black rounded-[2rem] text-center font-bold text-sm uppercase tracking-[0.3em] shadow-2xl"
+                className="hidden md:flex items-center gap-2 px-8 py-3 bg-black/10 dark:bg-white/10 text-neutral-900 dark:text-white border border-black/20 dark:border-white/20 rounded-full font-medium text-[11px] uppercase tracking-[0.3em] transition-all"
               >
+                <Send className="w-3 h-3" />
                 Botni ochish
               </motion.a>
+              
+              <button 
+                className="lg:hidden text-neutral-900 dark:text-white p-2 relative w-10 h-10 flex items-center justify-center transition-transform hover:scale-110 active:scale-95"
+                onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+                aria-label={isMobileMenuOpen ? "Close menu" : "Open menu"}
+              >
+                <AnimatePresence mode="popLayout">
+                  <motion.div
+                    key={isMobileMenuOpen ? 'close' : 'menu'}
+                    initial={{ opacity: 0, rotate: -180, scale: 0.5 }}
+                    animate={{ opacity: 1, rotate: 0, scale: 1 }}
+                    exit={{ opacity: 0, rotate: 180, scale: 0.5 }}
+                    transition={{ duration: 0.4, ease: [0.23, 1, 0.32, 1] }}
+                  >
+                    {isMobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+                  </motion.div>
+                </AnimatePresence>
+              </button>
             </div>
+          </div>
 
-            <div className="absolute bottom-12 text-neutral-600 text-[10px] uppercase tracking-[0.5em]">
-              Poktil • Madaniyatli Muloqot
-            </div>
-          </motion.div>
-        )}
-      </AnimatePresence>
-    </header>
+          {/* Independent Mobile Menu Expansion */}
+          <AnimatePresence>
+            {isMobileMenuOpen && (
+              <motion.div 
+                initial={{ opacity: 0, height: 0 }}
+                animate={{ opacity: 1, height: 'auto' }}
+                exit={{ opacity: 0, height: 0 }}
+                transition={{ 
+                  height: { type: 'spring', damping: 30, stiffness: 300 },
+                  opacity: { duration: 0.2 }
+                }}
+                className="lg:hidden"
+              >
+                <div className="pt-8 pb-4 flex flex-col space-y-6">
+                  {[
+                    { label: 'Nega?', id: 'nega', icon: <Sparkles className="w-4 h-4" /> },
+                    { label: 'Narxlar', id: 'narxlar', icon: <Gem className="w-4 h-4" /> },
+                    { label: 'Xususiyatlar', id: 'xususiyatlar', icon: <Shield className="w-4 h-4" /> },
+                    { label: 'Qo\'llanma', id: 'qollanma', icon: <Menu className="w-4 h-4" /> }
+                  ].map((item, idx) => (
+                    <motion.button 
+                      key={idx} 
+                      initial={{ opacity: 0, y: -20 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      exit={{ opacity: 0, y: -20 }}
+                      transition={{ 
+                        delay: 0.15 + (idx * 0.05) 
+                      }}
+                      onClick={() => scrollTo(item.id)}
+                      className="flex items-center gap-4 text-lg font-light text-neutral-600 dark:text-neutral-300 hover:text-[#62b4e0] transition-colors uppercase tracking-[0.3em] font-serif group w-full text-left"
+                    >
+                      <span className="text-[#62b4e0] opacity-40 group-hover:opacity-100 transition-opacity">{item.icon}</span>
+                      {item.label}
+                    </motion.button>
+                  ))}
+                  
+                  <motion.a 
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    exit={{ opacity: 0 }}
+                    transition={{ 
+                      delay: 0.4 
+                    }}
+                    href="https://t.me/poktil_bot" 
+                    className="w-full py-4 bg-[#62b4e0] text-white rounded-full text-center font-bold text-xs uppercase tracking-[0.2em] shadow-lg mt-4 active:scale-95 transition-transform"
+                  >
+                    Botni ochish
+                  </motion.a>
+                </div>
+              </motion.div>
+            )}
+          </AnimatePresence>
+        </motion.div>
+      </header>
+
+    </>
   );
 };

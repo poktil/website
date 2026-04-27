@@ -23,6 +23,26 @@ export const Hero: React.FC = () => {
     <section id="hero" className="snap-section bg-white dark:bg-neutral-950 px-4 md:px-8 relative overflow-hidden transition-colors duration-300">
       {/* Elegant Background Ambient Effects */}
       <div className="absolute inset-0 pointer-events-none">
+        {/* Morphing Blobs */}
+        <motion.div 
+          animate={{ 
+            scale: [1, 1.2, 1],
+            rotate: [0, 90, 0],
+            borderRadius: ["40% 60% 70% 30% / 40% 50% 60% 50%", "60% 40% 30% 70% / 60% 30% 70% 40%", "40% 60% 70% 30% / 40% 50% 60% 50%"]
+          }}
+          transition={{ duration: 20, repeat: Infinity, ease: "easeInOut" }}
+          className="absolute -top-[20%] -left-[10%] w-[60%] h-[60%] bg-[#62b4e010] blur-[100px]"
+        />
+        <motion.div 
+          animate={{ 
+            scale: [1.2, 1, 1.2],
+            rotate: [0, -90, 0],
+            borderRadius: ["60% 40% 30% 70% / 60% 30% 70% 40%", "40% 60% 70% 30% / 40% 50% 60% 50%", "60% 40% 30% 70% / 60% 30% 70% 40%"]
+          }}
+          transition={{ duration: 25, repeat: Infinity, ease: "easeInOut" }}
+          className="absolute -bottom-[20%] -right-[10%] w-[60%] h-[60%] bg-[#62b4e008] blur-[100px]"
+        />
+
         <motion.div 
           animate={{ 
             opacity: [0.05, 0.1, 0.05],
@@ -36,14 +56,15 @@ export const Hero: React.FC = () => {
         <div className="absolute inset-0 bg-[linear-gradient(to_right,#00000005_1px,transparent_1px),linear-gradient(to_bottom,#00000005_1px,transparent_1px)] dark:bg-[linear-gradient(to_right,#ffffff05_1px,transparent_1px),linear-gradient(to_bottom,#ffffff05_1px,transparent_1px)] bg-[size:60px_60px] [mask-image:radial-gradient(ellipse_80%_50%_at_50%_0%,#000_70%,transparent_100%)]"></div>
       </div>
       
-      <div className="snap-content relative z-10">
-        <div className="max-w-7xl mx-auto w-full grid lg:grid-cols-2 gap-20 items-center">
+      <div className="snap-content relative z-10 w-full">
+        <div className="w-full px-6 md:px-12 grid lg:grid-cols-2 gap-20 items-center min-h-screen py-32">
           
           {/* Left Content */}
           <motion.div 
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 1, ease: "easeOut" }}
+            initial={{ opacity: 0, y: 30, filter: 'blur(15px)' }}
+            whileInView={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
+            viewport={{ once: true }}
+            transition={{ duration: 1.2, ease: [0.22, 1, 0.36, 1] }}
             className="text-center lg:text-left"
           >
             <motion.div 
@@ -78,7 +99,7 @@ export const Hero: React.FC = () => {
                 whileHover={{ scale: 1.02, backgroundColor: '#62b4e0', color: '#fff' }}
                 whileTap={{ scale: 0.98 }}
                 href="https://t.me/poktil_bot" 
-                className="group relative px-12 py-5 bg-neutral-900 dark:bg-white text-white dark:text-black rounded-[2rem] font-bold text-sm shadow-2xl overflow-hidden transition-all uppercase tracking-[0.2em]"
+                className="group relative px-12 py-5 bg-neutral-900 dark:bg-white text-white dark:text-black rounded-full font-bold text-sm shadow-2xl overflow-hidden transition-all uppercase tracking-[0.2em]"
               >
                 <span className="relative flex items-center">
                   Hoziroq Start <ArrowRight className="ml-3 w-4 h-4" />
@@ -89,7 +110,7 @@ export const Hero: React.FC = () => {
                 whileHover={{ scale: 1.02, backgroundColor: "rgba(0,0,0,0.05)" }}
                 whileTap={{ scale: 0.98 }}
                 onClick={() => document.getElementById('nega')?.scrollIntoView({ behavior: 'smooth' })}
-                className="px-12 py-5 bg-transparent border border-black/10 dark:border-white/10 text-neutral-900 dark:text-white rounded-[2rem] font-bold text-sm transition-all uppercase tracking-[0.2em]"
+                className="px-12 py-5 bg-transparent border border-black/10 dark:border-white/10 text-neutral-900 dark:text-white rounded-full font-bold text-sm transition-all uppercase tracking-[0.2em]"
               >
                 Tanishish
               </motion.button>
@@ -123,7 +144,14 @@ export const Hero: React.FC = () => {
                   ></motion.div>
                   
                   {/* Inner Core */}
-                  <div className="absolute inset-6 bg-neutral-100/40 dark:bg-neutral-900/40 backdrop-blur-3xl rounded-[3.5rem] border border-black/10 dark:border-white/10 shadow-2xl flex items-center justify-center overflow-hidden">
+                  <motion.div 
+                    animate={{ 
+                      borderRadius: ["3.5rem", "4.5rem", "3.5rem"],
+                      scale: [1, 1.05, 1]
+                    }}
+                    transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
+                    className="absolute inset-6 bg-neutral-100/40 dark:bg-neutral-900/40 backdrop-blur-3xl border border-black/10 dark:border-white/10 shadow-2xl flex items-center justify-center overflow-hidden"
+                  >
                     {/* Scanning Line */}
                     <motion.div 
                       animate={{ top: ['-10%', '110%'] }}
@@ -143,7 +171,7 @@ export const Hero: React.FC = () => {
 
                     {/* Subtle Pattern */}
                     <div className="absolute inset-0 opacity-5 pointer-events-none bg-[radial-gradient(#62b4e0_1px,transparent_1px)] [background-size:24px:24px]"></div>
-                  </div>
+                  </motion.div>
 
                   {/* Floating Orbits */}
                   <motion.div 
